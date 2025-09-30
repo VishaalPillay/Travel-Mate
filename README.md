@@ -1,6 +1,6 @@
-##Travel-Mate: Smart Tourist Safety Monitoring
+# Travel-Mate: Smart Tourist Safety Monitoring
 
-Travel-Mate is a comprehensive safety application designed to protect tourists, developed by team VibeCoders for India's Growing Travel Culture.
+Travel-Mate is a comprehensive safety application designed to protect tourists, developed by team **VibeCoders** for India's Growing Travel Culture.
 
 
 The project's core is a proactive 
