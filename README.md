@@ -24,33 +24,65 @@ We use a feature-first monorepo structure to keep Mobile, Backend, and Data logi
 
 ```text
 travel-mate-core/
-├── docker-compose.yml           # 🐳 Spools up local PostgreSQL + PostGIS database
-├── 📱 mobile_app/               # FLUTTER (Tourist Interface)
-│   ├── assets/
-│   │   ├── tflite_models/       # 🧠 Offline AI models (e.g., movement_classifier.tflite)
-│   │   └── data/                # 💾 Pre-loaded JSONs (PCR Numbers, Hospital locations)
-│   ├── lib/
-│   │   ├── core/                # Global services (Location, Background Service)
-│   │   ├── features/
-│   │   │   ├── map_view/        # 🗺️ MapmyIndia Hybrid implementation
-│   │   │   ├── silent_guardian/ # 🤖 Offline Edge AI logic (Sensor listeners)
-│   │   │   ├── sos_emergency/   # 🚨 Smart Routing logic (Routes SOS to local PCR)
-│   │   │   └── offline_mode/    # 📶 Mesh/SMS fallback logic
-│   └── pubspec.yaml             # Deps: mappls_gl, tflite_flutter, sensors_plus
+├── README.md
+├── docker-compose.yml           # Database (PostGIS) setup
 │
-├── ⚙️ backend_engine/          # FASTAPI (Authority Brain)
+├── 📱 mobile_app/               # FLUTTER (The Tourist Node)
+│   ├── assets/
+│   │   ├── images/
+│   │   └── tflite_models/       # 🧠 [NEW] Store your .tflite files here
+│   │       └── movement_classifier.tflite
+│   │
+│   ├── lib/
+│   │   ├── main.dart
+│   │   ├── core/
+│   │   │   ├── services/
+│   │   │   │   ├── location_service.dart
+│   │   │   │   └── background_service.dart  # Keeps "Silent Guardian" alive when app is closed
+│   │   │   └── database/        # Local SQLite (Offline Red Zones)
+│   │   │
+│   │   └── features/
+│   │       ├── map_view/        # Mappls Map Screen
+│   │       │
+│   │       ├── silent_guardian/ # 🤖 [NEW] THE OFFLINE AI GUARD
+│   │       │   ├── logic/
+│   │       │   │   ├── sensor_stream.dart   # Listens to Accelerometer (X,Y,Z)
+│   │       │   │   └── anomaly_detector.dart # Runs TFLite model on sensor data
+│   │       │   └── screens/
+│   │       │       └── safety_check_ui.dart # "Are you okay?" countdown popup
+│   │       │
+│   │       └── sos_emergency/   # SMS/Mesh Fallback Logic
+│   │
+│   └── pubspec.yaml             # Add: tflite_flutter, sensors_plus, mappls_gl
+│
+├── ⚙️ backend_engine/          # FASTAPI (The Authority Brain)
 │   ├── app/
-│   │   ├── api/v1/              # Endpoints for SOS, Routes, and Zone Updates
-│   │   ├── ml_engine/           # 🧠 Risk Scoring AI (Weather + Terrain logic)
+│   │   ├── main.py
+│   │   ├── api/
+│   │   │   └── v1/
+│   │   │       ├── endpoints/
+│   │   │       │   ├── sos.py
+│   │   │       │   └── routes.py # Calls the Smart Route Predictor
+│   │   │
+│   │   ├── ml_engine/           # 🧠 [NEW] THE RISK PREDICTOR
+│   │   │   ├── __init__.py
 │   │   │   ├── risk_scorer.py   # The Logic: (Weather + Terrain + History) = Score
-│   │   │   └── trained_models/  # Saved Scikit-Learn model (.pkl)
-│   │   ├── db/                  # Database Models & Schemas
-│   │   └── services/            # Geofencing logic ("Is user in Red Zone?")
-│   ├── requirements.txt         # Deps: fastapi, uvicorn, geoalchemy2, scikit-learn
+│   │   │   └── trained_models/
+│   │   │       └── route_risk_model.pkl # Saved Scikit-Learn model
+│   │   │
+│   │   ├── core/
+│   │   │   └── disaster_feed.py # Polls SASE/IMD for Avalanches/Floods
+│   │   │
+│   │   └── db/                  # PostgreSQL Models
+│   │
+│   └── requirements.txt         # Add: scikit-learn, pandas, geoalchemy2
 │
 └── 🗃️ data_pipeline/           # DATA PROCESSING
-    ├── raw_data/                # 📄 Extracted data from J&K Intelligence PDF
-    └── scripts/                 # 🐍 Scripts to seed DB (CSV -> PostGIS)
+    ├── raw_data/
+    │   ├── red_zones_jk.geojson # Digitized from PDF Page 9
+    │   └── accident_history.csv # Fake data for training the Risk Model
+    └── scripts/
+        └── train_risk_model.py  # Script to generate the .pkl file for Backend
 
 ```
 ---
