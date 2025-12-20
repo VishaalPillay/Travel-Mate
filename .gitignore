@@ -1,0 +1,43 @@
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== IDE =====
+.idea/
+.vscode/
+*.iml
+
+# ===== Flutter / Dart =====
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+build/
+
+# ===== Android =====
+**/android/.gradle/
+**/android/app/build/
+
+# ===== iOS / macOS =====
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+
+# ===== Python =====
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+
+# ===== ML / Data =====
+*.h5
+*.pt
+*.onnx
+data/
+datasets/
+
+# ===== Logs =====
+*.log
