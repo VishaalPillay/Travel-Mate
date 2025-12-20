@@ -1,43 +1,91 @@
-# ===== OS =====
+# =========================
+# 🍎 MAC & SYSTEM FILES
+# =========================
 .DS_Store
+.DS_Store?
+._*
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# ===== IDE =====
-.idea/
+# =========================
+# 💻 IDE & EDITORS
+# =========================
 .vscode/
+.idea/
 *.iml
+*.swp
 
-# ===== Flutter / Dart =====
+# =========================
+# 🐍 PYTHON BACKEND (FastAPI & ML)
+# =========================
+# Virtual Environment (Crucial to ignore)
+venv/
+env/
+.env
+
+# Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large Data & Models
+# (We ignore these because they can be large. You generate them with scripts)
+*.pkl
+*.csv
+*.log
+
+# =========================
+# 📱 FLUTTER (Mobile App)
+# =========================
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
-.packages
-.pub-cache/
 build/
+.pub-cache/
+.pub/
 
-# ===== Android =====
-**/android/.gradle/
-**/android/app/build/
+# =========================
+# 🤖 ANDROID SPECIFIC
+# =========================
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+**/android/gradle/wrapper/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/local.properties
 
-# ===== iOS / macOS =====
+# =========================
+# 🍎 iOS SPECIFIC
+# =========================
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+
+# CocoaPods (Dependencies)
 **/ios/Pods/
-**/ios/.symlinks/
-**/ios/Flutter/Flutter.framework
-**/ios/Flutter/Flutter.podspec
+**/ios/Podfile.lock
 
-# ===== Python =====
-__pycache__/
-*.pyc
-.env
-.venv/
-venv/
+# Xcode User Settings (Personal only)
+*.mode1v3
+*.mode2v3
+*.moved-aside
+*.pbxuser
+*.perspectivev3
+*.users
+*.xccheckout
+*.xcuserstate
 
-# ===== ML / Data =====
-*.h5
-*.pt
-*.onnx
-data/
-datasets/
-
-# ===== Logs =====
-*.log
+# =========================
+# ⚠️ EXCEPTIONS (Force Git to track these)
+# =========================
+# We MUST track the iOS project structure, or the app won't build on other PCs
+!**/ios/Runner.xcodeproj
+!**/ios/Runner.xcworkspace
+!**/ios/Runner/Info.plist
+!**/ios/Runner/Base.lproj/
