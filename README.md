@@ -116,6 +116,14 @@ travel-mate-core/
     * Uses the **J&K Intelligence Database**.
     * **Logic:** User in `Baramulla` presses SOS -> App queries local DB -> Calls `Baramulla PCR (01952-234410)` directly.
 
+### 5. 🕸️ J&K Resiliency Mesh (Offline B2B Layer)
+* **What it is:** A decentralized "Store-and-Forward" network that functions when cellular towers are down or destroyed.
+* **How it works:**
+    * **Protocol:** Uses **Bluetooth Low Energy (BLE)** & **Wi-Fi Direct** (via `nearby_connections`) to create a P2P mesh between phones.
+    * **The Hop:** If a tourist in a "Red Zone" (No Signal) triggers SOS, the packet hops to nearby devices (Tourist B → Shepherd C → Army Truck).
+    * **Gateway Nodes:** The packet travels until it hits a **B2B Node** (Police Tablet/Checkpost) which acts as a "Super Sink" to upload data to the cloud.
+    * **Security:** Packets are AES-256 encrypted; intermediate phones relay the message without seeing the content.
+
 ---
 
 ## 👨‍💻 Developer Notes
